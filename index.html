@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matrix rain</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            overflow: hidden;
+            background-color: #161623;
+        }
+        canvas{
+            position: absolute;
+            top:0;
+            left:0;
+            /* background: blue; */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="can">  </canvas>
+
+
+
+
+<script>
+    const canvas = document.getElementById('can');
+    const ctx = can.getContext('2d');
+    can.height = window.innerHeight;
+    can.width = window.innerWidth;
+
+    // let grad = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+    let grad = ctx.createRadialGradient(canvas.width/2,canvas.height/2,100,canvas.width/2,canvas.height/2,50)
+    grad.addColorStop(0,'lime');
+    grad.addColorStop(0.2,'blue');
+    grad.addColorStop(0.4,'yellow');
+    grad.addColorStop(0.6,'maroon');
+    grad.addColorStop(0.8,'cyan');
+    grad.addColorStop(1,'orange');
+
+   var ch = "abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-+\|/?><1234567890";
+  //   var ch = "sk"
+    ch = ch.split("");
+    var fontsize = 15;
+    var columns = can.width/fontsize;
+
+    var drops = [];
+
+    for(var x = 0; x<columns; x++){
+        drops[x] = 1;
+    }
+    function draw(){
+        ctx.fillStyle = "rgba(0,0,0,0.06)";
+        ctx.fillRect(0,0,can.width,can.height);
+        ctx.fillStyle = "red";
+       // ctx.fillStyle = grad;
+        ctx.font = fontsize +"px Roman";
+
+        for(var i = 0; i<drops.length; i++){
+            var text = ch[Math.floor(Math.random()*ch.length)];
+            ctx.fillText(text,i*fontsize,drops[i]*fontsize);
+
+            if(drops[i]*fontsize>can.height && Math.random()>0.975)
+                drops[i] = 0;
+                drops[i]++;
+
+            }
+        }
+        setInterval(draw,33);
+        
+        
+        
+    
+
+
+
+
+
+    
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
